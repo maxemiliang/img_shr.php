@@ -1,17 +1,11 @@
 <?php
 session_start();
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "img";
+require_once("require/database.php");
 
-$conn = new mysqli($servername, $username, $password, $dbname);
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-} 
-
-$username = $_POST["signuser"];
-$password = $_POST["signpass"];
+$username = mysqli_real_escape_string($_POST["signuser"]);
+$password = mysqli_real_escape_string($_POST["signpass"]);
+$_SESSION["passerr"] = 0;
+$_SESSION["usererr"] = 1;
 
 if (strlen($username) > 30 or strlen($username) < 5 or strpos($username, " ") == TRUE) {
     $_SESSION["usererr"] = 1;
@@ -19,5 +13,11 @@ if (strlen($username) > 30 or strlen($username) < 5 or strpos($username, " ") ==
 } else if (strlen($password) > 30 or strlen($password) < 5){
     $_SESSION["passerr"] = 1;
     header("location: signin.php");
-} else 
+} else {
+    $hash_pass = password_hash($password, PASSWORD_DEFAULT);
+    $sign_query = "INSERT INTO users (username, password) values ('$username', '$hash_pass')";
+    mysqli_query($conn, $sign_query);
+    $_SESSION["username"] = $username;
+    header("location: index.php");
+}
 ?>

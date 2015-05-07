@@ -1,19 +1,8 @@
 <?php
 session_start();
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "img";
-
-$conn = new mysqli($servername, $username, $password, $dbname);
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-} 
-
+require_once("require/database.php");
     
 ?>
-
-
 <html>
 <head>
 <title>Gallery.php</title>    
@@ -30,6 +19,7 @@ if ($conn->connect_error) {
     <li><a href="ladda.php">Upload</a></li>
   </ul>
   <ul class="inline-list hide-for-small-only account-action">
+    <li><?php require("require/logged.php") ?></li>  
     <li><a href="signin.php">Login/Signin</a></li>
   </ul>
   <a class="account hide-for-medium-up" href="#" data-reveal-id="myModal"><i class="fi-unlock"></i></a>

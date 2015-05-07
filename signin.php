@@ -1,14 +1,6 @@
 <?php
 session_start();
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "img";
-
-$conn = new mysqli($servername, $username, $password, $dbname);
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-} 
+require_once("require/database.php");
 ?>
 <html>
 <head>
@@ -42,9 +34,19 @@ if ($conn->connect_error) {
               <div class="signup-panel">
                 <p class="welcome">Hello, new user? Sign up here!</p>
                 <form method="post" action="signup.php">
-                    <?php if($_SESSION["usererr"] = 1){
+                    <?php if (isset($_SESSION["usererr"]) == TRUE){
+                        if($_SESSION["usererr"] = 1){
                         echo '<div><p>Usernames must be between 5 and 30 characters and no                         spaces</p> </div>';
-                        session_unset($_SESSION["userlong"]);
+                        session_unset($_SESSION["usererr"]);
+                        };
+                    } else {
+                        echo "";
+                    } ?>
+                    <?php if (isset($_SESSION["passerr"]) == TRUE) {
+                        if($_SESSION["passerr"] = 1){
+                        echo '<div><p>Passwords must be between 5 and 30 characters</p>                           </div>';
+                        session_unset($_SESSION["passerr"]);
+                        };
                     } else {
                         echo "";
                     } ?>
@@ -63,7 +65,7 @@ if ($conn->connect_error) {
                       <span class="prefix"><i class="fi-lock"></i></span>
                     </div>
                     <div class="small-10 columns ">
-                      <input type="text" name="signpass" id="signpass" placeholder="Password">
+                      <input type="password" name="signpass" id="signpass" placeholder="Password">
                     </div>
                   </div>
                     <input class="button" type="submit"></input>
@@ -81,7 +83,23 @@ if ($conn->connect_error) {
               <div class="signup-panel">
                 <p class="welcome">Already registered? Signin here!</p>
                 <form method="post" action="login.php">
-                  <div class="row collapse">
+                  <?php if (isset($_SESSION["logusererr"]) == TRUE){
+                        if($_SESSION["logusererr"] = 1){
+                        echo '<div><p>Usernames must be between 5 and 30 characters and no                         spaces</p> </div>';
+                        session_unset($_SESSION["logusererr"]);
+                        };
+                    } else {
+                        echo "";
+                    } ?>
+                    <?php if (isset($_SESSION["logpasserr"]) == TRUE) {
+                        if($_SESSION["logpasserr"] = 1){
+                        echo '<div><p>Passwords must be between 5 and 30 characters</p>                           </div>';
+                        session_unset($_SESSION["logpasserr"]);
+                        };
+                    } else {
+                        echo "";
+                    } ?>
+                    <div class="row collapse">
                     <div class="small-2 columns">
                       <span class="prefix"><i class="fi-torso"></i></span>
                     </div>
@@ -94,7 +112,7 @@ if ($conn->connect_error) {
                       <span class="prefix"><i class="fi-lock"></i></span>
                     </div>
                     <div class="small-10 columns ">
-                      <input type="text" name="password" id="password" placeholder="Password">
+                      <input type="password" name="password" id="password" placeholder="Password">
                     </div>
                   </div>
                 </form>
