@@ -1,9 +1,21 @@
 <?php
-session_start();
+require_once("require/start_session.php");
 require_once("require/database.php");
 
-$username = mysqli_real_escape_string($conn, $_POST["signuser"]);
-$password = mysqli_real_escape_string($conn, $_POST["signpass"]);
+if(empty($_POST['signuser'])){
+     $_SESSION["usererr"] = 1;
+     header("location: signin.php");
+} else {
+    $username = mysqli_real_escape_string($conn, $_POST["signuser"]);
+    }
+ 
+if(empty($_POST['signpass'])){
+    $_SESSION["passerr"] = 1;
+    header("location: signin.php");
+} else {
+    $password = mysqli_real_escape_string($conn, $_POST["signpass"]);
+}
+
 $_SESSION["passerr"] = 0;
 $_SESSION["usererr"] = 0;
 
@@ -14,8 +26,7 @@ if (strlen($username) > 30 or strlen($username) < 5 or strpos($username, " ") ==
     $_SESSION["passerr"] = 1;
     header("location: signin.php");
 } else {
-    $hash_pass = password_hash($password, PASSWORD_DEFAULT);
-    $sign_query = "INSERT INTO users (username, password) values ('$username', '$hash_pass')";
+    $sign_query = "INSERT INTO users (username, password) values ('$username','".password_hash($password, PASSWORD_BCRYPT)."')";
     session_unset($_SESSION["passerr"]);
     session_unset($_SESSION["usererr"]);
     mysqli_query($conn, $sign_query);

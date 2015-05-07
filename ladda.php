@@ -1,5 +1,5 @@
 <?php
-session_start();
+require_once("require/start_session.php");
 require_once("require/database.php");
 ?>
 <html>
@@ -18,16 +18,24 @@ require_once("require/database.php");
     <li class="active"><a href="ladda.php">Upload</a></li>
   </ul>
   <ul class="inline-list hide-for-small-only account-action">
-    <li><a href="signin.php">Login/Signin</a></li>
+    <?php require_once("require/outorin.php") ?>
   </ul>
   <a class="account hide-for-medium-up" href="#" data-reveal-id="myModal"><i class="fi-unlock"></i></a>
 </nav>
 <div class="card">
-<form class="uploads" action="upload.php" method="post" enctype="multipart/form-data">
+  
+<?php
+  if (empty($_SESSION["username"]) !== TRUE) {
+    echo '<span class="title">Must be logged in to upload a image!</span>';
+  } else {
+    echo '<form class="uploads" action="upload.php" method="post" enctype="multipart/form-data">
     Select image to upload:
     <input type="file" name="fileToUpload" id="fileToUpload">
-    <input type="submit" value="Upload Image" name="submit">
-</form>
+    <input type="submit" class="button" value="Upload Image" name="submit"></form>';
+  } 
+
+?>
+
 </div>
 </body>
 </html>

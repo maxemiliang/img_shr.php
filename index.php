@@ -1,5 +1,5 @@
 <?php
-session_start();
+require_once("require/start_session.php");
 require_once("require/database.php");
     
 ?>
@@ -20,7 +20,7 @@ require_once("require/database.php");
   </ul>
   <ul class="inline-list hide-for-small-only account-action">
     <li><?php require("require/logged.php") ?></li>  
-    <li><a href="signin.php">Login/Signin</a></li>
+    <?php require_once("require/outorin.php") ?>
   </ul>
   <a class="account hide-for-medium-up" href="#" data-reveal-id="myModal"><i class="fi-unlock"></i></a>
 </nav>

@@ -1,5 +1,5 @@
 <?php
-session_start();
+require_once("require/start_session.php");
 require_once("require/database.php");
 
 

@@ -1,5 +1,5 @@
 <?php
-session_start();
+require_once("require/start_session.php");
 require_once("require/database.php");
 ?>
 <html>
@@ -19,7 +19,7 @@ require_once("require/database.php");
     <li><a href="ladda.php">Upload</a></li>
   </ul>
   <ul class="inline-list hide-for-small-only account-action">
-    <li class="active"><a href="#">Login/Signup</a></li>
+    <?php require_once("require/outorin.php") ?>
   </ul>
   <a class="account hide-for-medium-up" href="#" data-reveal-id="myModal"><i class="fi-unlock"></i></a>
 </nav>    
