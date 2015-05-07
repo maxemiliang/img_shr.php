@@ -35,18 +35,20 @@ require_once("require/database.php");
                 <p class="welcome">Hello, new user? Sign up here!</p>
                 <form method="post" action="signup.php">
                     <?php if (isset($_SESSION["usererr"]) == TRUE){
-                        if($_SESSION["usererr"] = 1){
+                        if ($_SESSION["usererr"] > 0){
                         echo '<div><p>Usernames must be between 5 and 30 characters and no                         spaces</p> </div>';
                         session_unset($_SESSION["usererr"]);
-                        };
+                        } else {
+                            echo "";
+                        }
                     } else {
                         echo "";
                     } ?>
                     <?php if (isset($_SESSION["passerr"]) == TRUE) {
-                        if($_SESSION["passerr"] = 1){
+                        if($_SESSION["passerr"] > 0){
                         echo '<div><p>Passwords must be between 5 and 30 characters</p>                           </div>';
                         session_unset($_SESSION["passerr"]);
-                        };
+                        }
                     } else {
                         echo "";
                     } ?>
@@ -99,6 +101,14 @@ require_once("require/database.php");
                     } else {
                         echo "";
                     } ?>
+                    <?php if (isset($_SESSION["userorpass"]) == TRUE) {
+                        if($_SESSION["userorpass"] = 1){
+                        echo '<div><p>Username or password is incorrect</p>                                       </div>';
+                        session_unset($_SESSION["userorpass"]);
+                        };
+                    } else {
+                        echo "";
+                    } ?>
                     <div class="row collapse">
                     <div class="small-2 columns">
                       <span class="prefix"><i class="fi-torso"></i></span>
@@ -115,8 +125,8 @@ require_once("require/database.php");
                       <input type="password" name="password" id="password" placeholder="Password">
                     </div>
                   </div>
+                    <input type="submit" class="button "></a>
                 </form>
-                <a href="#" class="button ">Sign In! </a>
               </div>
             </div>
            </div></p>
