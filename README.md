@@ -6,7 +6,7 @@ a little project for a image sharing site, possible forum/blog coming later when
 
 1.  upload images and a infinite scrolling of uploaded images,
 
-2.  Register and login (Login broken thoo..)
+2.  Register and login (still broken when swapping pages...)
 
 * Planned/under construction features
 
