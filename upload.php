@@ -58,9 +58,10 @@ if ($uploadOk == 0 ) {
     $file = substr($filename, -7);
  if (move_uploaded_file($_FILES['fileToUpload']['tmp_name'], $filename)) {  
      echo "The file has been uploaded.";
+     $useruploading = $_SESSION["user_id"];
      $date = date("Y-m-d");
-     $sql = "INSERT INTO imgs (images, date)
-     VALUES ('$file', '$date')";
+     $sql = "INSERT INTO imgs (images, date, userID)
+     VALUES ('$file', '$date', '$useruploading')";
         if ($conn->query($sql) === TRUE) {
             echo "New record created successfully";
         } else {
