@@ -67,7 +67,7 @@ if ($uploadOk == 0 ) {
             echo "Error: " . $sql . "<br>" . $conn->error;
         }
      sleep(5);
-     $_SESSION['success']=$uploadOk;
+     $_SESSION['success'] = $uploadOk;
      header("location: index.php");
     } else {
         echo "Sorry, there was an error uploading your file.";

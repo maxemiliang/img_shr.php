@@ -14,10 +14,8 @@ if(empty($_POST['signpass'])){
     header("location: signin.php");
 } else {
     $password = mysqli_real_escape_string($conn, $_POST["signpass"]);
+    session_unset();
 }
-
-$_SESSION["passerr"] = 0;
-$_SESSION["usererr"] = 0;
 
 if (strlen($username) > 30 or strlen($username) < 5 or strpos($username, " ") == TRUE) {
     $_SESSION["usererr"] = 1;
@@ -31,6 +29,6 @@ if (strlen($username) > 30 or strlen($username) < 5 or strpos($username, " ") ==
     session_unset($_SESSION["usererr"]);
     mysqli_query($conn, $sign_query);
     $_SESSION["username"] = $username;
-    header("location: index.php");
+    header("location: assign_id.php");
 }
 ?>

@@ -22,7 +22,7 @@ require_once("require/database.php");
     <li><?php require("require/logged.php") ?></li>  
     <?php require_once("require/outorin.php") ?>
   </ul>
-  <a class="account hide-for-medium-up" href="#" data-reveal-id="myModal"><i class="fi-unlock"></i></a>
+  <a class="account hide-for-medium-up" href="signin.php" data-reveal-id="myModal"><i class="fi-unlock"></i></a>
 </nav>
     <?php
 
