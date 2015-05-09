@@ -4,6 +4,9 @@ require_once("require/database.php");
 ?>
 <html>
 <head>
+  <link class="jsbin" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />
+<script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.0/jquery-ui.min.js"></script>
 <title>Gallery.php</title>    
 <link rel="stylesheet" href="foundation.css"/>
 <script src="modernizr.js"></script>
@@ -24,14 +27,36 @@ require_once("require/database.php");
   <a class="account hide-for-medium-up" href="signin.php" data-reveal-id="myModal"><i class="fi-unlock"></i></a>
 </nav>
 <div class="card">
+  <script type="text/javascript">
+  function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#blah')
+                    .attr('src', e.target.result)
+                    .width(1024)
+                    .height(720);
+            };
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+      $("#fileToUpload").change(function(){
+      readURL(this);
+    });
+    </script>
   
 <?php
   if (empty($_SESSION["user_id"]) >= 1) {
-    echo '<span class="title">Must be logged in to upload a image!</span>';
+    echo '<span class="title">You must be logged in to upload a image!</span>';
   } else {
-    echo '<form class="uploads" action="upload.php" method="post" enctype="multipart/form-data">
+    echo '<form class="uploads" action="upload.php" method="post" runat="server" enctype="multipart/form-data">
     Select image to upload:
-    <input type="file" name="fileToUpload" id="fileToUpload">
+    <input type="file" name="fileToUpload" accept="image/*" id="fileToUpload" onchange="readURL(this);">
+    <img id="blah" src="#" alt="Your image" /><br/>
+    Insert image description:
+    <input type="text" name="desc" id="desc" placeholder="image description">
     <input type="submit" class="button" value="Upload Image" name="submit"></form>';
   } 
 
