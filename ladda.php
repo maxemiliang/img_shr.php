@@ -62,7 +62,7 @@ require_once("require/database.php");
     } else {
       echo "";
     };
-    echo '<input type="text" name="desc" id="desc" placeholder="image description">
+    echo '<textarea maxlength="1000" name="desc" id="desc" placeholder="image description/blogpost (max 1000 characters)"></textarea>
     <input type="submit" class="button" value="Upload Image" name="submit" id="submits"></form>';
   } 
 

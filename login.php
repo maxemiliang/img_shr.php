@@ -28,6 +28,7 @@ if (mysqli_num_rows($result) === 1) {
         header("location: index.php");
     } else {
         $_SESSION["userorpass"] = 1;
+        header("location: index.php");
     }
 } else {
     $_SESSION["error"] = 1;
