@@ -11,19 +11,13 @@ $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
 if(isset($_POST["submit"])) {
     $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
     if($check !== false) {
-        if (file_exists($target_file)) {
-        echo "Sorry, file already exists.";
-        $uploadOk = 0;
-            session_destroy();
-        } if ($_FILES["fileToUpload"]["size"] > 500000) {
+        } if ($_FILES["fileToUpload"]["size"] > 1000000) {
         echo "Sorry, your file is too large.";
         $uploadOk = 0;
-            session_destroy();
         } if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
         && $imageFileType != "gif" ) {
         echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
         $uploadOk = 0;
-            session_destroy();
         } else {
         echo "File is an image - " . $check["mime"] . ".";
         $uploadOk = 1;
@@ -31,26 +25,17 @@ if(isset($_POST["submit"])) {
     } else {
         echo "File is not an image.";
         $uploadOk = 0;
-        session_destroy();
     }
-}
-function random_string($length) {
-    $key = '';
-    $keys = array_merge(range(0, 9), range('a', 'z'));
-
-    for ($i = 0; $i < $length; $i++) {
-        $key .= $keys[array_rand($keys)];
-    }
-
-    return $key;
-}
-
-echo random_string(50);
 if ($uploadOk == 0 ) {
     echo "Your file was not uploaded!";
     sleep(3);
     header("location: index.php");
+    $_SESSION["img_error"] = 1;
 } else {
+    $desc = mysqli_real_escape_string($conn ,$_POST["desc"]);
+    if (strlen($desc) > 1000) {
+        $_SESSION["descerr"] = 1;
+    } else {
     $filename = tempnam('uploads/', 'img');
     unlink($filename);
     $period_position = strrpos($filename, ".");
@@ -60,7 +45,7 @@ if ($uploadOk == 0 ) {
      echo "The file has been uploaded.";
      $useruploading = $_SESSION["user_id"];
      $date = date("Y-m-d");
-     $sql = "INSERT INTO imgs (images, date, userID) VALUES ('$file', '$date', '$useruploading')";
+     $sql = "INSERT INTO imgs (images, date, description, userid) VALUES ('$file', '$date', '$desc', '$useruploading')";
         if ($conn->query($sql) === TRUE) {
             echo "New record created successfully";
         } else {
@@ -71,7 +56,8 @@ if ($uploadOk == 0 ) {
      header("location: index.php");
     } else {
         echo "Sorry, there was an error uploading your file.";
-        session_destroy();
+        $_SESSION["img_error"] = 1;
     }
+}
 }
 ?>

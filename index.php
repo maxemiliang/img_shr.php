@@ -30,7 +30,7 @@ require_once("require/database.php");
     <?php
     $date2 = date('Y-m-d', strtotime('-7 days'));
     $i = 0;
-    $resultat = mysqli_query($conn,"SELECT images FROM imgs LIMIT 8");
+    $resultat = mysqli_query($conn,"SELECT images, description FROM imgs LIMIT 8");
     while($row = mysqli_fetch_array($resultat, MYSQLI_NUM)) {
     echo '<div class="medium-6 columns end">
     <div class="card">
@@ -39,7 +39,8 @@ require_once("require/database.php");
     </div>    
       <div class="content">
         <span class="title"></span>
-        <p>desc will come here</p>
+        <p>'; echo $row["1"]; 
+      echo '</p>
       </div>
       <div class="action">
         <a href="#">This is a link</a>

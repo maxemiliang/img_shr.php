@@ -54,10 +54,15 @@ require_once("require/database.php");
     echo '<form class="uploads" action="upload.php" method="post" runat="server" enctype="multipart/form-data">
     Select image to upload:
     <input type="file" name="fileToUpload" accept="image/*" id="fileToUpload" onchange="readURL(this);">
-    <img id="blah" src="#" alt="Your image" /><br/>
-    Insert image description:
-    <input type="text" name="desc" id="desc" placeholder="image description">
-    <input type="submit" class="button" value="Upload Image" name="submit"></form>';
+    <img class="inline-list hide-for-small-only account-action" id="blah" src="#" alt="Your image" /><br/>
+    Insert image description:';
+    if ($_SESSION["descerr"] == 1) {
+      echo "The description cannot be longer than 1000 characters";
+    } else {
+      echo "";
+    };
+    echo '<input type="text" name="desc" id="desc" placeholder="image description">
+    <input type="submit" class="button" value="Upload Image" name="submit" id="submits"></form>';
   } 
 
 ?>
