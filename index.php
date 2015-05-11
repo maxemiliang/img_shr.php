@@ -42,11 +42,15 @@ require_once("require/database.php");
         <p>'; echo $row["1"]; 
       echo '</p>
       </div>
-      <div class="action">
-        <a id="like" href="#">Like</a>
-        <a id="dislike" href="#">Dislike</a>
-      </div>
-    </div>
+      <div class="action">';
+      if (empty($_SESSION["user_id"]) >= 1) {
+         echo '</div>';
+      } else {
+        echo '<a id="like" href="like.php?like='; echo $row["0"]; echo '">Like</a>
+        <a id="dislike" href="like.php?dislike="'; echo $row["0"]; echo '">Dislike</a>';
+        echo '</div>';
+      }
+    echo '</div>
     </div>
     </div>';
     $i++;

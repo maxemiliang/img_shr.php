@@ -58,6 +58,7 @@ require_once("require/database.php");
     Insert image description:';
     if ($_SESSION["descerr"] == 1) {
       echo "The description cannot be longer than 1000 characters";
+      unset($_SESSION["descerr"]);
     } else {
       echo "";
     };
