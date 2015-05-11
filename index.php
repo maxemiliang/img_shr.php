@@ -43,8 +43,8 @@ require_once("require/database.php");
       echo '</p>
       </div>
       <div class="action">
-        <a href="#">This is a link</a>
-        <a href="#">This is a link</a>
+        <a id="like" href="#">Like</a>
+        <a id="dislike" href="#">Dislike</a>
       </div>
     </div>
     </div>
