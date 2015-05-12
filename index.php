@@ -25,8 +25,10 @@ require_once("require/database.php");
   <a class="account hide-for-medium-up" href="signin.php" data-reveal-id="myModal"><i class="fi-unlock"></i></a>
 </nav>
     <?php
-
-?>
+      if (isset($_SESSION["db_error"])) {
+        echo '<nav class="menu"><h1>You have an error with the database! If this is the first time starting this webapp run <a href="install/install.php">install.php</a></h1></nav>';
+      }
+    ?>
     <?php
     $date2 = date('Y-m-d', strtotime('-7 days'));
     $i = 0;
@@ -35,7 +37,7 @@ require_once("require/database.php");
     echo '<div class="medium-6 columns end">
     <div class="card">
     <div class="images">  
-    <a href='; echo "uploads/", $row["0"]; echo'><img height="500" width="500" src='; echo "uploads/", $row["0"];       echo '></a>
+    <a href='; echo "uploads/", $row["0"]; echo'><img height="500" width="500" src='; echo "uploads/", $row["0"]; echo '></a>
     </div>    
       <div class="content" id='.$row["0"].'>
         <span class="title"></span>
