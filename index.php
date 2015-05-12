@@ -30,25 +30,36 @@ require_once("require/database.php");
     <?php
     $date2 = date('Y-m-d', strtotime('-7 days'));
     $i = 0;
-    $resultat = mysqli_query($conn,"SELECT images, description FROM imgs LIMIT 8");
+    $resultat = mysqli_query($conn,"SELECT images, description, likes FROM imgs LIMIT 8");
     while($row = mysqli_fetch_array($resultat, MYSQLI_NUM)) {
     echo '<div class="medium-6 columns end">
     <div class="card">
     <div class="images">  
     <a href='; echo "uploads/", $row["0"]; echo'><img height="500" width="500" src='; echo "uploads/", $row["0"];       echo '></a>
     </div>    
-      <div class="content">
+      <div class="content" id='.$row["0"].'>
         <span class="title"></span>
         <p>'; echo $row["1"]; 
       echo '</p>
       </div>
       <div class="action">';
       if (empty($_SESSION["user_id"]) >= 1) {
+         echo '<span class="liek">'.$row["2"].'</span>';
          echo '</div>';
       } else {
-        echo '<a id="like" href="like.php?like='; echo $row["0"]; echo '">Like</a>
-        <a id="dislike" href="like.php?dislike="'; echo $row["0"]; echo '">Dislike</a>';
-        echo '</div>';
+        if ($_SESSION["like_err"] == 1 and $row["0"] == $_GET["like"]) {
+          echo "You have already liked this post..";
+          unset($_SESSION["like_err"]);
+          echo '<span class="liek">'.$row["2"].'</span>';
+          echo '<a id="like" href="like.php?like='; echo $row["0"]; echo '">Like</a>
+          <a id="dislike" href="like.php?dislike='; echo $row["0"]; echo '">Dislike</a>';
+          echo '</div>';
+        } else {
+          echo '<span class="liek">'.$row["2"].'</span>';
+          echo '<a id="like" href="like.php?like='; echo $row["0"]; echo '">Like</a>
+          <a id="dislike" href="like.php?dislike='; echo $row["0"]; echo '">Dislike</a>';
+          echo '</div>';
+      }
       }
     echo '</div>
     </div>
