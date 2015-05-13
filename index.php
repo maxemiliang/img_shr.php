@@ -46,18 +46,18 @@ require_once("require/database.php");
       </div>
       <div class="action">';
       if (empty($_SESSION["user_id"]) >= 1) {
-         echo '<span class="liek">'.$row["2"].'</span>';
+         echo '<span class="liek">'.$row["2"].' Likes </span>';
          echo '</div>';
       } else {
         if ($_SESSION["like_err"] == 1 and $row["0"] == $_GET["like"]) {
-          echo "You have already liked this post..";
+          echo "You have already liked this post";
           unset($_SESSION["like_err"]);
-          echo '<span class="liek">'.$row["2"].'</span>';
+          echo '<span class="liek">'.$row["2"].' Likes </span>';
           echo '<a id="like" href="like.php?like='; echo $row["0"]; echo '">Like</a>
           <a id="dislike" href="like.php?dislike='; echo $row["0"]; echo '">Dislike</a>';
           echo '</div>';
         } else {
-          echo '<span class="liek">'.$row["2"].'</span>';
+          echo '<span class="liek">'.$row["2"].' Likes </span>';
           echo '<a id="like" href="like.php?like='; echo $row["0"]; echo '">Like</a>
           <a id="dislike" href="like.php?dislike='; echo $row["0"]; echo '">Dislike</a>';
           echo '</div>';
