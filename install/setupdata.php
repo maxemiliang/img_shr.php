@@ -32,11 +32,11 @@ if (mysqli_query($conn, $create_imgs)) {
 			if (mysqli_query($conn, $create_liked)) {
 				header("location: setupadmin.php");
 			} else {
-				$_SESSION["dbimg"] = mysqli_error($conn);
+				$_SESSION["dberror"] = mysqli_error($conn);
 				header("location: install_error.php");
 			} 
 		} else {
-			$_SESSION["dbimg"] = mysqli_error($conn);
+			$_SESSION["dberror"] = mysqli_error($conn);
 			header("location: install_error.php");
 			}
 } else {

@@ -28,6 +28,9 @@ require_once("require/database.php");
       if (isset($_SESSION["db_error"])) {
         echo '<nav class="menu"><h1>You have an error with the database! If this is the first time starting this webapp run <a href="install/install.php">install.php</a></h1></nav>';
       }
+      if (isset($_SESSION["installed"])) {
+        echo "<strong>IMPORTANT!!!!</strong> INSTALLATION DONE! PLEASE REMOVE THE INSTALL FOLDER!!!";
+      }
     ?>
     <?php
     $date2 = date('Y-m-d', strtotime('-7 days'));
