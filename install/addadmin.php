@@ -1,6 +1,6 @@
 <?php
-require_once("require/start_session.php");
-require_once("require/database.php");
+require_once("../require/start_session.php");
+require_once("../require/database.php");
 
 if(empty($_POST['signuser'])){
      $_SESSION["usererr"] = 1;

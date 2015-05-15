@@ -1,7 +1,8 @@
 <?php
 require_once("require/start_session.php");
 require_once("require/database.php");
-    
+
+error_reporting(E_ALL & ~E_WARNING); 
 ?>
 <html>
 <head>
@@ -30,6 +31,9 @@ require_once("require/database.php");
       }
       if (isset($_SESSION["installed"])) {
         echo "<strong>IMPORTANT!!!!</strong> INSTALLATION DONE! PLEASE REMOVE THE INSTALL FOLDER!!!";
+        unset($_SESSION["installed"]);
+      } else if (scandir("install")) {
+        echo "<strong>IMPORTANT</strong> INSTALLATION FOLDER STILL EXISTS PLEASE REMOVE IT OR RUN THE INSTALLATION! <a href='install/install.php'>installation here</a>";
       }
     ?>
     <?php
