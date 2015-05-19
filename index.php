@@ -1,5 +1,4 @@
 <?php
-require_once("require/start_session.php");
 require_once("require/database.php");
 
 error_reporting(E_ALL & ~E_WARNING); 
@@ -28,6 +27,7 @@ error_reporting(E_ALL & ~E_WARNING);
     <?php
       if (isset($_SESSION["db_error"])) {
         echo '<nav class="menu"><h1>You have an error with the database! If this is the first time starting this webapp run <a href="install/install.php">install.php</a></h1></nav>';
+        unset($_SESSION["db-error"]);
       }
       if (isset($_SESSION["installed"])) {
         echo "<strong>IMPORTANT!!!!</strong> INSTALLATION DONE! PLEASE REMOVE THE INSTALL FOLDER!!!";

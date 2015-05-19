@@ -1,5 +1,4 @@
 <?php 
-require_once("require/start_session.php");
 require_once("require/database.php");
 
 $user = mysqli_real_escape_string($conn, $_SESSION["user_id"]);

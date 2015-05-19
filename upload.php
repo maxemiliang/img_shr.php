@@ -1,5 +1,4 @@
 <?php
-require_once("require/start_session.php");
 require_once("require/database.php");
 
 
@@ -33,6 +32,8 @@ if ($uploadOk == 0 ) {
     $_SESSION["img_error"] = 1;
 } else {
     $desc = mysqli_real_escape_string($conn ,$_POST["desc"]);
+    $desc_fix = trim($desc);
+    $desc_inp = filter_input(INPUT_POST, $desc_fix, FILTER_SANITIZE_SPECIAL_CHARS);
     if (strlen($desc) > 1000) {
         $_SESSION["descerr"] = 1;
     } else {
@@ -45,7 +46,7 @@ if ($uploadOk == 0 ) {
      echo "The file has been uploaded.";
      $useruploading = $_SESSION["user_id"];
      $date = date("Y-m-d");
-     $sql = "INSERT INTO imgs (images, date, description, userid) VALUES ('$file', '$date', '$desc', '$useruploading')";
+     $sql = "INSERT INTO imgs (images, date, description, userid) VALUES ('$file', '$date', '$desc_input', '$useruploading')";
         if ($conn->query($sql) === TRUE) {
             echo "New record created successfully";
         } else {

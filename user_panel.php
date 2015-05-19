@@ -1,5 +1,4 @@
 <?php
-require_once("require/database.php");
 require_once("require/start_session.php");
 
 $user_info = array($_SESSION["username"], $_SESSION["user_id"]);
