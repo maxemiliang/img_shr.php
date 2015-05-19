@@ -10,7 +10,7 @@ if(isset($_GET["like"])) {
 } else {
 	$dislike = mysqli_real_escape_string($conn, $_GET["dislike"]);
 	$has_liked = "SELECT userID FROM liked WHERE postID = '$dislike' AND userID = '$user'";
-	$liek = $like;
+	$liek = $dislike;
 }
 $check = mysqli_query($conn, $has_liked);
 
